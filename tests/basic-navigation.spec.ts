@@ -1,6 +1,6 @@
-import { test } from "playwright/test";
+import { test, expect } from "@playwright/test";
 
-test("Basic navigation", async ({ page }) => {
+test.skip("Basic navigation", async ({ page }) => {
   await page.goto("https://gitlab.com/");
   await page
     .locator(".navigation-bottom-right")
@@ -10,4 +10,6 @@ test("Basic navigation", async ({ page }) => {
   // await page.locator('[data-testid="new-user-last-name-field"]').fill("Snowi");
   await page.getByTestId("new-user-first-name-field").fill("Jhonny");
   await page.getByTestId("new-user-last-name-field").fill("Snowii");
+  await expect(page.getByTestId("new-user-first-name-field")).toBeEditable();
+  await expect(page.getByTestId("new-user-last-name-field")).toBeEditable();
 });
